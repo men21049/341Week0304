@@ -8,6 +8,6 @@ router.get("/:access_token", controller.getAuthenticatedToken);
 // Route to create a new token
 router.post("/", controller.createToken);
 // Route to delete a token by ID
-router.delete("/:id", controller.deleteTokenById);
+router.delete("/:access_token", controller.deleteTokenById);
 
 module.exports = router;

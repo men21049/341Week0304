@@ -62,7 +62,7 @@ const createToken = async (req, res) => {
 const deleteTokenById = async (req, res) => {
   try {
     const db = getDb();
-    const tokenId = req.params.id;
+    const tokenId = req.params.access_token;
 
     const { error } = schemaAuth.validate({ access_token: tokenId });
     if (error) {
@@ -71,14 +71,15 @@ const deleteTokenById = async (req, res) => {
 
     const result = await db
       .collection("authentication")
-      .deleteOne({ _id: new ObjectId(tokenId) });
+      .deleteOne({ access_token: tokenId });
+    res.setHeader("Content-Type", "application/json");
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: "Token not found" });
     }
-    res.setHeader("Content-Type", "application/json");
     res.status(200).json({ message: "Token deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Error deleting token from the database" });
+    console.log(error);
   }
 };
 
