@@ -4,7 +4,9 @@
   "description": "Week 03-04 Project for CSE 341",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon start"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
