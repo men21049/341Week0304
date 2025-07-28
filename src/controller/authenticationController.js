@@ -36,6 +36,33 @@ const getAuthenticatedToken = async (req, res) => {
   }
 };
 
+const updateToken = async (req, res) => {
+  try {
+    const db = getDb();
+    const tokenId = req.params.id;
+
+    const { error } = schemaAuth.validate({ access_token: accessToken });
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+    const result = await db
+      .collection("authentication")
+      .replaceOne({ _id: new ObjectId(tokenId) }, generateToken());
+
+    if (result.modifiedCount === 0) {
+      return res
+        .status(404)
+        .json({ error: "Token not found or no changes made" });
+    }
+
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json({ message: "Token updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Error creating authentication token" });
+  }
+};
+
 const createToken = async (req, res) => {
   try {
     const db = getDb();
@@ -86,5 +113,6 @@ const deleteTokenById = async (req, res) => {
 module.exports = {
   getAuthenticatedToken,
   createToken,
+  updateToken,
   deleteTokenById,
 };
