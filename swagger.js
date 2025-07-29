@@ -5,7 +5,7 @@ const doc = {
     title: "CSE341 Contacts API",
     description: "Api for CSE341 week 03-04 Project",
   },
-  host: "cse341-ww-student-code-1-sdyk.onrender.com",
+  host: "localhost:3000",
   schemes: ["http", "https"],
 };
 
