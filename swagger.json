@@ -5,15 +5,16 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "cse341-ww-student-code-1-sdyk.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {
     "/customers/": {
       "get": {
-        "description": "Api for CSE341 week 03-04 Project",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -275,7 +276,7 @@
         }
       }
     },
-    "/token/{id}": {
+    "/token/{token_id}": {
       "put": {
         "description": "",
         "produces": [
@@ -283,7 +284,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "token_id",
             "in": "path",
             "required": true,
             "type": "string"
