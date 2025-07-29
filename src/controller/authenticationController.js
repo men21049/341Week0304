@@ -39,7 +39,7 @@ const getAuthenticatedToken = async (req, res) => {
 const updateToken = async (req, res) => {
   try {
     const db = getDb();
-    const tokenId = req.params.id;
+    const Id = req.params.id;
 
     const { error } = schemaAuth.validate({ access_token: accessToken });
     if (error) {
@@ -48,7 +48,10 @@ const updateToken = async (req, res) => {
 
     const result = await db
       .collection("authentication")
-      .replaceOne({ _id: new ObjectId(tokenId) }, generateToken());
+      .updateOne(
+        { _id: new ObjectId(Id) },
+        { $set: { access_token: generateToken() } }
+      );
 
     if (result.modifiedCount === 0) {
       return res
