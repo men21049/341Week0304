@@ -59,7 +59,9 @@ const updateToken = async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json({ message: "Token updated successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Error updating authentication token" });
+    res
+      .status(500)
+      .json({ error: "Error updating authentication token" }, error);
   }
 };
 
