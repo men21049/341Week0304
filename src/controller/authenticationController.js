@@ -22,14 +22,6 @@ const getAuthenticatedToken = async (req, res) => {
     }
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(authenticatedUser);
-
-    await db
-      .collection("authentication")
-      .updateOne(
-        { access_Token: accessToken.access_token },
-        { lastConnection: new Date() },
-        { upsert: true }
-      );
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Error retrieving authenticated Token" });
@@ -48,7 +40,7 @@ const updateToken = async (req, res) => {
 
     const result = await db
       .collection("authentication")
-      .updateOne({ _id: { Id } }, { $set: { access_token: generateToken() } });
+      .updateOne({ _id: { Id } }, { access_token: generateToken() });
 
     if (result.modifiedCount === 0) {
       return res
@@ -59,9 +51,8 @@ const updateToken = async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json({ message: "Token updated successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Error updating authentication token" }, error);
+    res.status(500).json({ error: "Error updating authentication token" });
+    console.log(error);
   }
 };
 
