@@ -8,7 +8,7 @@ router.get("/:access_token", controller.getAuthenticatedToken);
 // Route to create a new token
 router.post("/", controller.createToken);
 // Route to update the token
-router.put("/:token_id", controller.updateToken);
+router.put("/:id", controller.updateToken);
 // Route to delete a token by ID
 router.delete("/:access_token", controller.deleteTokenById);
 

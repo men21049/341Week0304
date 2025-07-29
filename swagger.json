@@ -11,6 +11,16 @@
     "https"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/customers/": {
       "get": {
         "description": "",
@@ -275,7 +285,7 @@
         }
       }
     },
-    "/token/{token_id}": {
+    "/token/{id}": {
       "put": {
         "description": "",
         "produces": [
@@ -283,7 +293,7 @@
         ],
         "parameters": [
           {
-            "name": "token_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
