@@ -48,10 +48,7 @@ const updateToken = async (req, res) => {
 
     const result = await db
       .collection("authentication")
-      .updateOne(
-        { _id: new ObjectId(Id) },
-        { $set: { access_token: generateToken() } }
-      );
+      .updateOne({ _id: { Id } }, { $set: { access_token: generateToken() } });
 
     if (result.modifiedCount === 0) {
       return res
