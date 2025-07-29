@@ -42,7 +42,7 @@ const updateToken = async (req, res) => {
       .collection("authentication")
       .updateOne(
         { access_token: accessToken },
-        { access_token: generateToken() }
+        { $set: { access_token: generateToken() } }
       );
 
     if (result.modifiedCount === 0) {
