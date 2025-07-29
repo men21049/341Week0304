@@ -23,7 +23,6 @@ const getAuthenticatedToken = async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(authenticatedUser);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Error retrieving authenticated Token" });
   }
 };
@@ -55,7 +54,6 @@ const updateToken = async (req, res) => {
     res.status(200).json({ message: "Token updated successfully" });
   } catch (error) {
     res.status(500).json({ error: "Error updating authentication token" });
-    console.log(error);
   }
 };
 
@@ -67,7 +65,6 @@ const createToken = async (req, res) => {
     // Validate the new token data
     const { error } = schemaAuth.validate(newToken);
     if (error) {
-      console.log(error);
       return res.status(400).json({ error: error.details[0].message });
     }
 
@@ -102,7 +99,6 @@ const deleteTokenById = async (req, res) => {
     res.status(200).json({ message: "Token deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Error deleting token from the database" });
-    console.log(error);
   }
 };
 
